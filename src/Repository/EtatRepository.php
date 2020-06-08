@@ -36,6 +36,17 @@ class EtatRepository extends ServiceEntityRepository
     }
     */
 
+    public function getLeVisiteur($id)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('e')
+            ->from(Etat::class, 'e')
+            ->where('e.id = :id')
+            ->setParameter('id', $id);
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+        return $result;
+    }
     /*
     public function findOneBySomeField($value): ?Etat
     {

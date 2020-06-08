@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Consultation Fiche Frais
+{% endblock %}
+
+{% block body %}
+
+<a href="/accueil"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+
+
+<h3><center>Consulter <b>Fiches Frais</b></center></h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Numéro Fiche Frais</th>
+      <th scope="col">Code Identifiant</th>
+      <th scope="col">Etat de la fiche</th>
+      <th scope="col">Créée le</th>
+      <th scope="col">Nombre de justificatifs</th>
+      <th scope="col">Montant total(En euros)</th>
+      <th scope="col">Date de modification</th>
+    </tr>
+  </thead>
+     <a href="/CompteVisiteur" class="btn btn-outline-dark">Sortir</a><br/>
+ {% for line in fichefrais %}
+          <tr>
+            {% for data in line %}
+              <td>{{ data }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+</table>
+  <br><br><br>
+
+      <h1>Hors <b>Forfait</b></h1><br>
+      <table class="table">
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Libellé</th>
+          <th scope="col">Montant</th>
+        </tr>
+        
+      </table>
+
+      <form action="afficherFF" method="POST">
+        <button type="submit" name="date" value="date">Par enregistrée</button>
+        <button type="submit" name="validé" value="libelle">Par Validée</button>
+        <button type="submit" name="remboursé" value="montant">Par Remboursée</button>
+        <button type="submit" name="refusé" value="montant">Par Refusée</button>
+      </form>
+{% endblock %}

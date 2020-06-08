@@ -36,6 +36,21 @@ class FicheFraisRepository extends ServiceEntityRepository
     }
     */
 
+    public function getByMois($mois, $id)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('ff')
+            ->from('GSBVisiteurBundle:fiche_frais', 'ff')
+            ->where('ff.visiteur = :id')
+            ->andWhere('ff.mois = :mois')
+            ->setParameter('id', $id)
+            ->setParameter('mois', $mois);
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+        return $result;
+    }
+    
+    
     /*
     public function findOneBySomeField($value): ?FicheFrais
     {
